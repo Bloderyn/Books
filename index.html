@@ -4,17 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book library</title>
-    <link rel="stylesheet" href="CSS/style.css" />
+
+    <link rel="stylesheet" href="CSS/globalStyle.css" />
+
+    <link rel="stylesheet" href="CSS/header.css" />
   </head>
 
   <body>
     <header>
+      <div class="app-header">
       <h1>My Book Library</h1>
+
+      <button onclick="toggleDarkMode()" id="theme-toggle"><img src="Images/darkMode.svg" alt="Toggle Dark Mode" /></button>
+      </div>
     </header>
 
     <main>
-      <div class="books-container"></div>
-
       <form id="book-form"">
         <h2>Add a new book</h2>
         <label for="title">Title:</label>
@@ -33,8 +38,11 @@
        
         <button type="submit">Add Book</button>
       </form>
+
+      <ul class="books-container"></ul>
     </main>
 
     <script src="JS/script.js" defer></script>
+    <script src="JS/darkmode.js" defer></script>
   </body>
 </html>

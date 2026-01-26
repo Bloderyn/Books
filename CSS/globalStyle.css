@@ -1,0 +1,48 @@
+:root {
+  --bg-main: #F7F4EF;
+  --bg-card: #E9E2D8;
+  --bg-form: #F4EFE8;
+
+  --text-main: #2F2F2F;
+  --text-soft: #6C6C6C;
+
+  --accent-green: #355D4A;
+  --accent-wood: #8B5E41;
+  --accent-red: #7B2E2F;
+
+  --border: #C9BDAF;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+:root.dark-mode {
+  --bg-main: #1E1B18;
+  --bg-card: #2A2623;
+  --bg-form: #2F2B27;
+
+  --text-main: #F1E9DB;
+  --text-soft: #B9AE9F;
+
+  --accent-green: #3E6F58;
+  --accent-wood: #A8744C;
+  --accent-red: #9A3C3E;
+
+  --border: #463F3A;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);  
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ul li {
+  list-style-type: none;
+}
