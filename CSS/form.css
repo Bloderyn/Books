@@ -1,0 +1,47 @@
+#book-form {
+  margin: 0 2rem 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-form);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px var(--shadow);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+#book-form input[type="text"],
+#book-form input[type="number"] {
+  flex: 1 1 180px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+#book-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#book-form button[type="submit"] ,
+.book-card button {
+    background: var(--accent-green);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px var(--shadow);`
+}
+
+#book-form button[type="submit"]:hover,
+.book-card button:hover {
+    background: var(--accent-wood);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px var(--shadow);
+}
