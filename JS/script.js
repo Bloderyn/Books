@@ -1,9 +1,10 @@
 const myLibrary = [];
 
-function book(title, author, pages, read) {
+function book(title, author, pages, genreSelect, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.genreSelect = genreSelect;
   this.read = read; // Boolean indicating if the book has been read
   this.id = crypto.randomUUID();
 }
@@ -53,6 +54,7 @@ function displayBooks() {
       <p>Author: ${book.author}</p>
       <p>Pages: ${book.pages}</p>
       <p>Status: ${book.read ? "Read" : "Not Read"}</p>
+      <p>Genre: ${book.genreSelect}</p>
       <button class="toggle-read-btn">Toggle Read Status</button>
       <button class="remove-book-btn">Remove Book</button>
       `;
@@ -66,9 +68,10 @@ function addBookToLibrary() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
+  const genre = document.getElementById("genreSelect").value;
   const readStatus = document.getElementById("read-status").checked;
 
-  const newBook = new book(title, author, pages, readStatus);
+  const newBook = new book(title, author, pages, genre, readStatus);
 
   myLibrary.push(newBook);
   displayBooks();
@@ -96,7 +99,13 @@ function loadLibrary() {
   const parsed = JSON.parse(libraryData);
 
   parsed.forEach((item) => {
-    const bookItem = new book(item.title, item.author, item.pages, item.read);
+    const bookItem = new book(
+      item.title,
+      item.author,
+      item.pages,
+      item.genre,
+      item.read,
+    );
     bookItem.id = item.id;
     myLibrary.push(bookItem);
   });
