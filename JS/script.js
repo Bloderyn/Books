@@ -103,7 +103,7 @@ function loadLibrary() {
       item.title,
       item.author,
       item.pages,
-      item.genre,
+      item.genreSelect,
       item.read,
     );
     bookItem.id = item.id;
