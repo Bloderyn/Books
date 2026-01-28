@@ -114,28 +114,43 @@ if (form) {
 }
 
 function saveLibrary() {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+  try {
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    console.log("Library saved successfully", myLibrary);
+  } catch (error) {
+    console.error("Error saving library:", error);
+    if (error.name === "QuotaExceededError") {
+      alert(
+        "Storage limit exceeded. Your images may be too large. Try using smaller images.",
+      );
+    }
+  }
 }
 
 function loadLibrary() {
-  const libraryData = localStorage.getItem("myLibrary");
-  if (!libraryData) return;
+  try {
+    const libraryData = localStorage.getItem("myLibrary");
+    if (!libraryData) return;
 
-  const parsed = JSON.parse(libraryData);
+    const parsed = JSON.parse(libraryData);
 
-  parsed.forEach((item) => {
-    const covers = item.coverUrls || (item.coverUrl ? [item.coverUrl] : []);
-    const bookItem = new Book(
-      item.title,
-      item.author,
-      item.pages,
-      item.genreSelect,
-      covers,
-      item.read,
-    );
-    bookItem.id = item.id;
-    myLibrary.push(bookItem);
-  });
+    parsed.forEach((item) => {
+      const covers = item.coverUrls || (item.coverUrl ? [item.coverUrl] : []);
+      const bookItem = new Book(
+        item.title,
+        item.author,
+        item.pages,
+        item.genreSelect,
+        covers,
+        item.read,
+      );
+      bookItem.id = item.id;
+      myLibrary.push(bookItem);
+    });
+    console.log("Library loaded successfully", myLibrary);
+  } catch (error) {
+    console.error("Error loading library:", error);
+  }
 }
 
 loadLibrary();

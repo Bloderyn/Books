@@ -13,6 +13,41 @@ const MAX_IMAGES = 4;
 window.uploadedImages = [];
 window.updatePreviews = updatePreviews;
 
+// Compress image to reduce storage size
+function compressImage(file, maxWidth = 800, quality = 0.7) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+
+        // Resize if image is too large
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to JPEG with compression (smaller than PNG)
+        const compressedDataUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(compressedDataUrl);
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 dropZone.addEventListener("click", () => {
   if (window.uploadedImages.length >= MAX_IMAGES) {
     alert(`You can upload a maximum of ${MAX_IMAGES} images.`);
@@ -67,19 +102,20 @@ function updatePreviews() {
 coverInput.addEventListener("change", function () {
   const files = Array.from(coverInput.files);
 
-  files.forEach((file) => {
+  files.forEach(async (file) => {
     if (window.uploadedImages.length >= MAX_IMAGES) return;
 
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      window.uploadedImages.push(event.target.result);
+    try {
+      const compressedImage = await compressImage(file);
+      window.uploadedImages.push(compressedImage);
       updatePreviews();
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("Error compressing image:", error);
+      alert("Failed to process image: " + file.name);
+    }
   });
 });
 
-// Prevent default behaviors for drag-and-drop events
 function preventDefaults(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -105,23 +141,23 @@ function preventDefaults(e) {
 dropZone.addEventListener("drop", (e) => {
   preventDefaults(e);
 
-  const files = Array.from(e.dataTransfer.files).filter((file) =>
-    file.type.startsWith("image/"),
-  );
+  const files = Array.from(e.dataTransfer.files);
 
   if (files.length === 0) {
-    alert("Please drop valid image files (PNG, JPG, GIF, etc.).");
+    alert("Please drop some files.");
     return;
   }
 
-  files.forEach((file) => {
+  files.forEach(async (file) => {
     if (window.uploadedImages.length >= MAX_IMAGES) return;
 
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      window.uploadedImages.push(event.target.result);
+    try {
+      const compressedImage = await compressImage(file);
+      window.uploadedImages.push(compressedImage);
       updatePreviews();
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("Error processing file:", error);
+      alert(`Failed to process: ${file.name}. Please use a valid image file.`);
+    }
   });
 });
