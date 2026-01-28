@@ -1,12 +1,14 @@
 // Book Library Functionality
 const myLibrary = [];
 
-function Book(title, author, pages, genreSelect, coverUrl, read) {
+function Book(title, author, pages, genreSelect, coverUrls, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.genreSelect = genreSelect;
-  this.coverUrl = coverUrl;
+  this.coverUrls = Array.isArray(coverUrls)
+    ? coverUrls
+    : [coverUrls].filter(Boolean); // Array of cover images
   this.read = read; // Boolean indicating if the book has been read
   this.id = crypto.randomUUID();
 }
@@ -53,9 +55,16 @@ function displayBooks() {
     card.classList.add("book-card");
     card.dataset.id = book.id;
 
-    const coverHtml = book.coverUrl
-      ? `<img src="${book.coverUrl}" alt="${book.title} cover" class="book-cover">`
-      : "";
+    let coverHtml = "";
+    if (book.coverUrls && book.coverUrls.length > 0) {
+      coverHtml = `<div class="hover-gallery">`;
+      book.coverUrls.forEach((url, index) => {
+        coverHtml += `<div class="hover-zone hover-zone-${index + 1}">
+          <img src="${url}" alt="${book.title} cover" class="book-cover">
+        </div>`;
+      });
+      coverHtml += `</div>`;
+    }
 
     card.innerHTML = `
       ${coverHtml}
@@ -78,19 +87,23 @@ function addBookToLibrary() {
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
   const genre = document.getElementById("genreSelect").value;
-  const coverUrl = document.getElementById("coverImage").files[0]
-    ? URL.createObjectURL(document.getElementById("coverImage").files[0])
-    : "";
+  const coverUrls = window.uploadedImages ? [...window.uploadedImages] : [];
   const readStatus = document.getElementById("read-status").checked;
 
-  const newBook = new Book(title, author, pages, genre, coverUrl, readStatus);
+  const newBook = new Book(title, author, pages, genre, coverUrls, readStatus);
 
   myLibrary.push(newBook);
   displayBooks();
   form.reset();
+
+  if (window.uploadedImages) {
+    window.uploadedImages.length = 0;
+    if (window.updatePreviews) {
+      window.updatePreviews();
+    }
+  }
 }
 
-// Set up form submission listener once
 const form = document.getElementById("book-form");
 if (form) {
   form.addEventListener("submit", function (e) {
@@ -111,12 +124,13 @@ function loadLibrary() {
   const parsed = JSON.parse(libraryData);
 
   parsed.forEach((item) => {
+    const covers = item.coverUrls || (item.coverUrl ? [item.coverUrl] : []);
     const bookItem = new Book(
       item.title,
       item.author,
       item.pages,
       item.genreSelect,
-      item.coverUrl,
+      covers,
       item.read,
     );
     bookItem.id = item.id;

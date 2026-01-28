@@ -10,10 +10,11 @@ if (!previewContainer) {
 }
 
 const MAX_IMAGES = 4;
-let uploadedImages = [];
+window.uploadedImages = [];
+window.updatePreviews = updatePreviews;
 
 dropZone.addEventListener("click", () => {
-  if (uploadedImages.length >= MAX_IMAGES) {
+  if (window.uploadedImages.length >= MAX_IMAGES) {
     alert(`You can upload a maximum of ${MAX_IMAGES} images.`);
     return;
   }
@@ -23,7 +24,7 @@ dropZone.addEventListener("click", () => {
 function updatePreviews() {
   previewContainer.innerHTML = "";
 
-  if (uploadedImages.length === 0) {
+  if (window.uploadedImages.length === 0) {
     dropZone.classList.remove("has-image");
     const addIcon = document.querySelector(".add-icon");
     if (addIcon && addIcon.parentElement) {
@@ -38,10 +39,10 @@ function updatePreviews() {
     addIcon.parentElement.style.display = "none";
   }
 
-  uploadedImages.forEach((imgData, index) => {
+  window.uploadedImages.forEach((imgData, index) => {
     const imgWrapper = document.createElement("div");
     imgWrapper.className = "image-preview-wrapper";
-    imgWrapper.style.zIndex = uploadedImages.length - index;
+    imgWrapper.style.zIndex = window.uploadedImages.length - index;
 
     const img = document.createElement("img");
     img.src = imgData;
@@ -53,7 +54,7 @@ function updatePreviews() {
     removeBtn.type = "button";
     removeBtn.onclick = (e) => {
       e.stopPropagation();
-      uploadedImages.splice(index, 1);
+      window.uploadedImages.splice(index, 1);
       updatePreviews();
     };
 
@@ -67,11 +68,11 @@ coverInput.addEventListener("change", function () {
   const files = Array.from(coverInput.files);
 
   files.forEach((file) => {
-    if (uploadedImages.length >= MAX_IMAGES) return;
+    if (window.uploadedImages.length >= MAX_IMAGES) return;
 
     const reader = new FileReader();
     reader.onload = function (event) {
-      uploadedImages.push(event.target.result);
+      window.uploadedImages.push(event.target.result);
       updatePreviews();
     };
     reader.readAsDataURL(file);
@@ -88,7 +89,7 @@ function preventDefaults(e) {
 ["dragenter", "dragover"].forEach((eventName) => {
   dropZone.addEventListener(eventName, (e) => {
     preventDefaults(e);
-    if (uploadedImages.length < MAX_IMAGES) {
+    if (window.uploadedImages.length < MAX_IMAGES) {
       dropZone.classList.add("dragover");
     }
   });
@@ -114,11 +115,11 @@ dropZone.addEventListener("drop", (e) => {
   }
 
   files.forEach((file) => {
-    if (uploadedImages.length >= MAX_IMAGES) return;
+    if (window.uploadedImages.length >= MAX_IMAGES) return;
 
     const reader = new FileReader();
     reader.onload = function (event) {
-      uploadedImages.push(event.target.result);
+      window.uploadedImages.push(event.target.result);
       updatePreviews();
     };
     reader.readAsDataURL(file);
