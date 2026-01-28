@@ -21,6 +21,15 @@
   gap: 0.5rem;
 }
 
+.add-book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
 #book-form input[type="text"],
 #book-form input[type="number"],
 #book-form select {
@@ -34,10 +43,11 @@
 }
 
 #book-form input[type="text"]:focus,
-#book-form input[type="number"]:focus {
+#book-form input[type="number"]:focus,
+#book-form select:focus {
   outline: none;
-  border-color: var(--accent-red);
-  box-shadow: 0 0 5px var(--accent-red);
+  border-color: var(--accent-wood);
+  box-shadow: 0 0 5px var(--accent-wood);
 }
 
 #book-form label {
@@ -49,15 +59,29 @@
   letter-spacing: 0.1rem;
 }
 
+#book-form select {
+  cursor: pointer;
+}
+
+#book-form input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
 #book-form button[type="submit"] {
   width: 120px;
+  height: 50px;
   justify-self: start;
   background: var(--accent-green);
   color: #fff;
   border: none;
   border-radius: 6px;
   padding: 0.35rem 0.6rem;
-  font-size: 0.85rem;
+  font-size: 1.05rem;
+  font-family: "EB Garamond", serif;
+  text-transform: uppercase;
+  font-weight: 700;
   cursor: pointer;
   transition:
     background 0.2s ease,

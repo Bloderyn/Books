@@ -1,15 +1,17 @@
+// Book Library Functionality
 const myLibrary = [];
 
-function book(title, author, pages, genreSelect, read) {
+function Book(title, author, pages, genreSelect, coverUrl, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.genreSelect = genreSelect;
+  this.coverUrl = coverUrl;
   this.read = read; // Boolean indicating if the book has been read
   this.id = crypto.randomUUID();
 }
 
-book.prototype.toggleRead = function () {
+Book.prototype.toggleRead = function () {
   this.read = !this.read;
 };
 
@@ -17,6 +19,7 @@ function removeBook(id) {
   const removeIndex = myLibrary.findIndex((b) => b.id === id);
   if (removeIndex !== -1) {
     myLibrary.splice(removeIndex, 1);
+    saveLibrary();
   }
 }
 
@@ -35,6 +38,7 @@ document.addEventListener("click", (e) => {
     const bookToToggle = myLibrary.find((b) => b.id === toggleID);
     if (bookToToggle) {
       bookToToggle.toggleRead();
+      saveLibrary();
       displayBooks();
     }
   }
@@ -49,7 +53,12 @@ function displayBooks() {
     card.classList.add("book-card");
     card.dataset.id = book.id;
 
+    const coverHtml = book.coverUrl
+      ? `<img src="${book.coverUrl}" alt="${book.title} cover" class="book-cover">`
+      : "";
+
     card.innerHTML = `
+      ${coverHtml}
       <h2>${book.title}</h2>
       <p>Author: ${book.author}</p>
       <p>Pages: ${book.pages}</p>
@@ -69,9 +78,12 @@ function addBookToLibrary() {
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
   const genre = document.getElementById("genreSelect").value;
+  const coverUrl = document.getElementById("coverImage").files[0]
+    ? URL.createObjectURL(document.getElementById("coverImage").files[0])
+    : "";
   const readStatus = document.getElementById("read-status").checked;
 
-  const newBook = new book(title, author, pages, genre, readStatus);
+  const newBook = new Book(title, author, pages, genre, coverUrl, readStatus);
 
   myLibrary.push(newBook);
   displayBooks();
@@ -99,11 +111,12 @@ function loadLibrary() {
   const parsed = JSON.parse(libraryData);
 
   parsed.forEach((item) => {
-    const bookItem = new book(
+    const bookItem = new Book(
       item.title,
       item.author,
       item.pages,
       item.genreSelect,
+      item.coverUrl,
       item.read,
     );
     bookItem.id = item.id;

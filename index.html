@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lancelot&family=Metamorphous&family=Uncial+Antiqua&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lancelot&family=Metamorphous&family=Uncial+Antiqua&display=swap"
       rel="stylesheet"
     />
 
@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="CSS/header.css" />
 
     <link rel="stylesheet" href="CSS/form.css" />
+
+    <link rel="stylesheet" href="CSS/dragDrop.css" />
 
     <link rel="stylesheet" href="CSS/bookCards.css" />
   </head>
@@ -69,12 +71,37 @@
           </div>
         </div>
 
-        <label for="read-status">
-          <input id="read-status" type="checkbox" name="read-status" />
-          Already read
-        </label>
+        <div class="cover-upload">
+          <label for="coverImage" class="cover-label"> Cover image</label>
+          <div id="drop-zone">
+            <p>
+              <span
+                ><img
+                  class="add-icon"
+                  src="Images/add.svg"
+                  alt="Add cover image"
+              /></span>
+            </p>
+          </div>
 
-        <button type="submit">Add Book</button>
+          <input
+            type="file"
+            id="coverImage"
+            name="coverImage"
+            accept="image/*"
+            multiple
+            hidden
+          />
+        </div>
+
+        <div class="add-book">
+          <label for="read-status">
+            <input id="read-status" type="checkbox" name="read-status" />
+            Already read
+          </label>
+
+          <button type="submit">Add Book</button>
+        </div>
       </form>
 
       <ul class="books-container"></ul>
@@ -82,5 +109,6 @@
 
     <script src="JS/script.js" defer></script>
     <script src="JS/darkmode.js" defer></script>
+    <script src="JS/dragAndDrop.js" defer></script>
   </body>
 </html>
