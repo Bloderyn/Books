@@ -119,3 +119,10 @@
   text-transform: uppercase;
   font-size: 2rem;
 }
+
+.form-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
