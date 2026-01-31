@@ -34,8 +34,9 @@
 #book-form input[type="number"],
 #book-form select {
   padding: 0.7rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: 2px solid var(--border);
+  font-family: "garamond", serif;
   border-radius: 6px;
   background-color: var(--bg-main);
   color: var(--text-main);
@@ -53,6 +54,17 @@
   box-shadow:
     0 0 0 3px rgba(var(--accent-wood-rgb), 0.2),
     0 0 8px var(--accent-wood);
+}
+
+#book-form input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+#book-form input[type="number"]::-webkit-inner-spin-button,
+#book-form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #book-form label {
@@ -130,4 +142,106 @@
   align-items: center;
   justify-content: center;
   gap: 3rem;
+}
+
+/* dropdown styles */
+select,
+::picker(select) {
+  appearance: base-select;
+  background: var(--bg-main);
+  scrollbar-width: none;
+}
+
+::picker(select)::-webkit-scrollbar {
+  display: none;
+}
+
+select::picker-icon {
+  color: #999999;
+  transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+::picker(select) {
+  border: none;
+}
+
+option {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+
+  border: 2px solid var(--border);
+  color: var(--text-main);
+  font-family: "Lancelot", serif;
+  font-size: 1.3rem;
+  background: var(--accent-brown);
+  padding: 10px;
+  transition: 0.4s;
+}
+
+option:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+
+option:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+
+::picker(select) {
+  border-radius: 8px;
+}
+
+option:not(option:last-of-type) {
+  border-bottom: none;
+}
+
+option:nth-of-type(odd) {
+  background: var(--accent-soft-brown);
+}
+
+option .icon {
+  font-size: 1.6rem;
+  text-box: trim-both cap alphabetic;
+}
+
+selectedcontent .icon {
+  display: none;
+}
+
+::picker(select) {
+  opacity: 0;
+  transition: all 0.5s allow-discrete;
+}
+
+::picker(select):popover-open {
+  opacity: 1;
+  margin-top: 8px;
+}
+
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+    margin-top: -8px;
+  }
+}
+
+.animation-stagger {
+  transition:
+    opacity 0.3s ease-out,
+    top 0.3s ease-out;
+  transition-delay: calc(200ms + (sibling-index() - 1) * 100ms);
+  position: relative;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+option:hover,
+option:focus {
+  background: var(--accent-wood);
 }

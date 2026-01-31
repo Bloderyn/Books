@@ -9,22 +9,26 @@
   --accent-green: #3b6451;
   --accent-wood: #8b5e41;
   --accent-red: #7b2e2f;
+  --accent-brown: #b6a29b;
+  --accent-soft-brown: #d3c4b8;
 
   --border: #c9bdaf;
   --shadow: rgba(0, 0, 0, 0.08);
 }
 
 :root.dark-mode {
-  --bg-main: #1e1b18;
+  --bg-main: #292421;
   --bg-card: #2a2623;
-  --bg-form: #2f2b27;
+  --bg-form: #352e2b;
 
   --text-main: #f1e9db;
   --text-soft: #b9ae9f;
 
   --accent-green: #3e6f58;
-  --accent-wood: #a8744c;
+  --accent-wood: #8b6548;
   --accent-red: #9a3c3e;
+  --accent-brown: #251f1c;
+  --accent-soft-brown: #2e2724;
 
   --border: #463f3a;
   --shadow: rgba(0, 0, 0, 0.35);
