@@ -35,11 +35,14 @@
 #book-form select {
   padding: 0.7rem;
   font-size: 1rem;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: 6px;
   background-color: var(--bg-main);
   color: var(--text-main);
   width: 500px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 #book-form input[type="text"]:focus,
@@ -47,7 +50,9 @@
 #book-form select:focus {
   outline: none;
   border-color: var(--accent-wood);
-  box-shadow: 0 0 5px var(--accent-wood);
+  box-shadow:
+    0 0 0 3px rgba(var(--accent-wood-rgb), 0.2),
+    0 0 8px var(--accent-wood);
 }
 
 #book-form label {
