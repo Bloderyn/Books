@@ -63,18 +63,37 @@ function displayBooks() {
           <img src="${url}" alt="${book.title} cover" class="book-cover">
         </div>`;
       });
+
+      if (book.coverUrls.length > 1) {
+        coverHtml += `<div class="gallery-dots">`;
+        for (let i = 1; i < book.coverUrls.length; i++) {
+          coverHtml += `<span class="gallery-dot"></span>`;
+        }
+        coverHtml += `</div>`;
+      }
+
       coverHtml += `</div>`;
     }
 
     card.innerHTML = `
-      ${coverHtml}
-      <h2>${book.title}</h2>
-      <p>Author: ${book.author}</p>
-      <p>Pages: ${book.pages}</p>
-      <p>Status: ${book.read ? "Read" : "Not Read"}</p>
-      <p>Genre: ${book.genreSelect}</p>
-      <button class="toggle-read-btn">Toggle Read Status</button>
-      <button class="remove-book-btn">Remove Book</button>
+      <div class="card-layout">
+        <div class="card-image">
+          ${coverHtml}
+        </div>
+        <div class="card-info">
+        <div class="card-text">
+          <h2>${book.title}</h2>
+          <p>Author: ${book.author}</p>
+          <p>Pages: ${book.pages}</p>
+          <p>Status: ${book.read ? "Read" : "Not Read"}</p>
+          <p>Genre: ${book.genreSelect}</p>
+        </div>
+        <div class="card-buttons">
+          <button class="toggle-read-btn">Toggle Read Status</button>
+          <button class="remove-book-btn">Remove Book</button>
+        </div>
+        </div>
+      </div>
       `;
 
     container.appendChild(card);
