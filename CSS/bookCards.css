@@ -14,11 +14,22 @@
     0 4px 6px rgba(0, 0, 0, 0.07),
     0 10px 15px rgba(0, 0, 0, 0.06);
   border-left: none;
-  border-image: linear-gradient(to bottom, var(--accent-wood), transparent) 1;
-  border-left-width: 6px;
+  border-left-width: 10px;
   border-left-style: solid;
   width: 480px;
   height: 350px;
+}
+
+.book-card.not-read {
+  border-image: linear-gradient(to bottom, #944e5d, transparent) 1;
+}
+
+.book-card.reading {
+  border-image: linear-gradient(to bottom, #7d706c, transparent) 1;
+}
+
+.book-card.read {
+  border-image: linear-gradient(to bottom, #6d8643, transparent) 1;
 }
 
 .card-layout {
@@ -74,7 +85,7 @@
   padding: 0.6rem 1rem;
   border: none;
   border-radius: 6px;
-  background: linear-gradient(135deg, var(--accent-wood), #8b6f47);
+  background: linear-gradient(135deg, var(--accent-green), #428074);
   color: white;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -85,21 +96,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-read-btn {
-  transition: all 0.3s ease;
-}
-
 .toggle-read-btn.not-read {
-  background: #6c757d;
+  background: linear-gradient(135deg, #7d706c, #685f5a);
 }
 
 .toggle-read-btn.reading {
-  background: #ffc107;
-  color: #000;
+  background: linear-gradient(135deg, #6d8643, #697e42);
 }
 
 .toggle-read-btn.read {
-  background: #28a745;
+  background: linear-gradient(135deg, #944e5d, #834854);
 }
 
 .book-cover {

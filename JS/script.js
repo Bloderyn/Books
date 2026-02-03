@@ -62,7 +62,7 @@ function displayBooks() {
 
   myLibrary.forEach((book) => {
     const card = document.createElement("li");
-    card.classList.add("book-card");
+    card.classList.add("book-card", book.status);
     card.dataset.id = book.id;
 
     let coverHtml = "";
