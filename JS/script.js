@@ -1,7 +1,7 @@
 // Book Library Functionality
 const myLibrary = [];
 
-function Book(title, author, pages, genreSelect, coverUrls, read) {
+function Book(title, author, pages, genreSelect, coverUrls, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -9,12 +9,18 @@ function Book(title, author, pages, genreSelect, coverUrls, read) {
   this.coverUrls = Array.isArray(coverUrls)
     ? coverUrls
     : [coverUrls].filter(Boolean); // Array of cover images
-  this.read = read; // Boolean indicating if the book has been read
+  this.status = status || "not-read"; // Boolean indicating if the book has been read
   this.id = crypto.randomUUID();
 }
 
 Book.prototype.toggleRead = function () {
-  this.read = !this.read;
+  if (this.status === "not-read") {
+    this.status = "reading";
+  } else if (this.status === "reading") {
+    this.status = "read";
+  } else {
+    this.status = "not-read";
+  }
 };
 
 function removeBook(id) {
@@ -27,21 +33,25 @@ function removeBook(id) {
 
 // Event delegation for toggle read status and remove book
 document.addEventListener("click", (e) => {
-  if (e.target.matches(".remove-book-btn")) {
+  if (e.target && e.target.classList.contains("remove-book-btn")) {
     const cardRemove = e.target.closest(".book-card");
-    const removeID = cardRemove.dataset.id;
-    removeBook(removeID);
-    displayBooks();
+    if (cardRemove) {
+      const removeID = cardRemove.dataset.id;
+      removeBook(removeID);
+      displayBooks();
+    }
   }
 
-  if (e.target.matches(".toggle-read-btn")) {
+  if (e.target && e.target.classList.contains("toggle-read-btn")) {
     const cardToggle = e.target.closest(".book-card");
-    const toggleID = cardToggle.dataset.id;
-    const bookToToggle = myLibrary.find((b) => b.id === toggleID);
-    if (bookToToggle) {
-      bookToToggle.toggleRead();
-      saveLibrary();
-      displayBooks();
+    if (cardToggle) {
+      const toggleID = cardToggle.dataset.id;
+      const bookToToggle = myLibrary.find((b) => b.id === toggleID);
+      if (bookToToggle) {
+        bookToToggle.toggleRead();
+        saveLibrary();
+        displayBooks();
+      }
     }
   }
 });
@@ -83,14 +93,22 @@ function displayBooks() {
         <div class="card-info">
         <div class="card-text">
           <h2>${book.title}</h2>
-          <p>Author: ${book.author}</p>
-          <p>Pages: ${book.pages}</p>
-          <p>Status: ${book.read ? "Read" : "Not Read"}</p>
-          <p>Genre: ${book.genreSelect}</p>
+          <p><b>Author:</b> ${book.author}</p>
+          <p><b>Pages:</b> ${book.pages}</p>
+          <p><b>Status:</b> ${book.status === "read" ? "Read" : book.status === "reading" ? "Currently reading" : "Not Read"}</p>
+          <p><b>Genre:</b> ${book.genreSelect}</p>
         </div>
         <div class="card-buttons">
-          <button class="toggle-read-btn">Toggle Read Status</button>
-          <button class="remove-book-btn">Remove Book</button>
+          <button class="toggle-read-btn ${book.status}">
+  ${
+    book.status === "not-read"
+      ? "Start Reading"
+      : book.status === "reading"
+        ? "Mark as Read"
+        : "Mark Unread"
+  }
+</button>
+          <button class="remove-book-btn">Remove</button>
         </div>
         </div>
       </div>
@@ -107,9 +125,11 @@ function addBookToLibrary() {
   const pages = document.getElementById("pages").value;
   const genre = document.getElementById("genreSelect").value;
   const coverUrls = window.uploadedImages ? [...window.uploadedImages] : [];
-  const readStatus = document.getElementById("read-status").checked;
+  const status = document.getElementById("read-status").checked
+    ? "read"
+    : "not-read";
 
-  const newBook = new Book(title, author, pages, genre, coverUrls, readStatus);
+  const newBook = new Book(title, author, pages, genre, coverUrls, status);
 
   myLibrary.push(newBook);
   displayBooks();

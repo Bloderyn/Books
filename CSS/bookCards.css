@@ -1,8 +1,8 @@
 .books-container {
-  margin: 0 2rem 2rem;
+  margin: 0 5rem 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 12rem;
+  gap: 14rem;
 }
 
 .book-card {
@@ -10,9 +10,14 @@
   border-radius: 10px;
   padding: 1rem;
   margin: 1rem 2rem;
-  box-shadow: 0 2px 6px var(--shadow);
-  border-left: 6px solid var(--accent-wood);
-  width: 400px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 10px 15px rgba(0, 0, 0, 0.06);
+  border-left: none;
+  border-image: linear-gradient(to bottom, var(--accent-wood), transparent) 1;
+  border-left-width: 6px;
+  border-left-style: solid;
+  width: 480px;
   height: 350px;
 }
 
@@ -24,13 +29,22 @@
 
 .card-image {
   flex-shrink: 0;
-  width: 180px;
+  width: 200px;
   height: 100%;
 }
 
-.card-text { 
+.card-text {
+  display: flex;
+  flex-direction: column;
   font-family: "garamond", serif;
+  font-size: 1.1rem;
 }
+
+.card-text h2 {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
 .card-info {
   flex-grow: 1;
   display: flex;
@@ -46,6 +60,54 @@
 .book-card p {
   margin: 0.15rem 0;
   color: var(--text-soft);
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-direction: column;
+}
+
+.card-buttons button {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent-wood), #8b6f47);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-read-btn {
+  transition: all 0.3s ease;
+}
+
+.toggle-read-btn.not-read {
+  background: #6c757d;
+}
+
+.toggle-read-btn.reading {
+  background: #ffc107;
+  color: #000;
+}
+
+.toggle-read-btn.read {
+  background: #28a745;
+}
+
+.book-cover {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-zone:hover .book-cover {
+  transform: scale(1.05);
 }
 
 .hover-gallery {
