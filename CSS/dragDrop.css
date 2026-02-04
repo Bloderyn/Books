@@ -135,3 +135,280 @@
   display: block;
   font-family: "Lancelot", sans-serif;
 }
+
+@media (max-width: 1440px) {
+  #drop-zone {
+    width: 450px;
+  }
+
+  #preview-container {
+    width: 280px;
+    left: -40px;
+  }
+
+  .image-preview-wrapper {
+    width: 140px;
+    height: 180px;
+  }
+
+  .image-preview-wrapper:nth-child(1) {
+    left: 0;
+  }
+
+  .image-preview-wrapper:nth-child(2) {
+    left: 80px;
+  }
+
+  .image-preview-wrapper:nth-child(3) {
+    left: 160px;
+  }
+
+  .image-preview-wrapper:nth-child(4) {
+    left: 240px;
+  }
+
+  .add-icon {
+    margin-left: 180px;
+  }
+
+  .cover-upload {
+    margin-left: -250px;
+  }
+
+  .cover-upload label {
+    margin-left: 180px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #drop-zone {
+    width: 300px;
+  }
+
+  #preview-container {
+    width: 280px;
+    height: 100px;
+    left: -40px;
+  }
+
+  .image-preview-wrapper {
+    width: 80px;
+    height: 120px;
+  }
+
+  .image-preview-wrapper:nth-child(1) {
+    left: 0;
+  }
+
+  .image-preview-wrapper:nth-child(2) {
+    left: 70px;
+  }
+
+  .image-preview-wrapper:nth-child(3) {
+    left: 140px;
+  }
+
+  .image-preview-wrapper:nth-child(4) {
+    left: 210px;
+  }
+
+  .add-icon {
+    margin-left: 160px;
+  }
+
+  .cover-upload {
+    margin-left: -220px;
+  }
+
+  .cover-upload label {
+    margin-left: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  #drop-zone {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  #preview-container {
+    width: 250px;
+    left: -30px;
+  }
+
+  .image-preview-wrapper {
+    width: 120px;
+    height: 160px;
+  }
+
+  .image-preview-wrapper:nth-child(1) {
+    left: 0;
+  }
+
+  .image-preview-wrapper:nth-child(2) {
+    left: 70px;
+  }
+
+  .image-preview-wrapper:nth-child(3) {
+    left: 140px;
+  }
+
+  .image-preview-wrapper:nth-child(4) {
+    left: 210px;
+  }
+
+  .add-icon {
+    margin-left: 150px;
+  }
+
+  .cover-upload {
+    margin-left: -200px;
+  }
+
+  .cover-upload label {
+    margin-left: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  #drop-zone {
+    width: 100%;
+    min-height: 150px;
+    padding: 0.6rem;
+  }
+
+  #preview-container {
+    width: 200px;
+    height: 180px;
+    left: -20px;
+  }
+
+  .image-preview-wrapper {
+    width: 100px;
+    height: 140px;
+  }
+
+  .image-preview-wrapper:nth-child(1) {
+    left: 0;
+  }
+
+  .image-preview-wrapper:nth-child(2) {
+    left: 60px;
+  }
+
+  .image-preview-wrapper:nth-child(3) {
+    left: 120px;
+  }
+
+  .image-preview-wrapper:nth-child(4) {
+    left: 180px;
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(1) {
+    transform: translateX(-10px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(2) {
+    transform: translateX(-5px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(3) {
+    transform: translateX(10px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(4) {
+    transform: translateX(15px);
+  }
+
+  .add-icon {
+    width: 50px;
+    height: 50px;
+    margin-left: 100px;
+  }
+
+  .cover-upload {
+    margin-left: -150px;
+    margin-top: 1.5rem;
+  }
+
+  .cover-upload label {
+    margin-left: 100px;
+    font-size: 1rem;
+  }
+
+  .remove-image-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  #drop-zone {
+    min-height: 120px;
+  }
+
+  #preview-container {
+    width: 160px;
+    height: 160px;
+    left: -10px;
+  }
+
+  .image-preview-wrapper {
+    width: 80px;
+    height: 120px;
+  }
+
+  .image-preview-wrapper:nth-child(1) {
+    left: 0;
+  }
+
+  .image-preview-wrapper:nth-child(2) {
+    left: 50px;
+  }
+
+  .image-preview-wrapper:nth-child(3) {
+    left: 100px;
+  }
+
+  .image-preview-wrapper:nth-child(4) {
+    left: 150px;
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(1) {
+    transform: translateX(-8px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(2) {
+    transform: translateX(-4px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(3) {
+    transform: translateX(8px);
+  }
+
+  #preview-container:hover .image-preview-wrapper:nth-child(4) {
+    transform: translateX(12px);
+  }
+
+  .add-icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 70px;
+  }
+
+  .cover-upload {
+    margin-left: -100px;
+  }
+
+  .cover-upload label {
+    margin-left: 70px;
+    font-size: 0.9rem;
+  }
+
+  .remove-image-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+}

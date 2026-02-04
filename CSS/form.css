@@ -5,7 +5,8 @@
   border-radius: 10px;
   box-shadow: 0 2px 6px var(--shadow);
   border: 1px solid var(--border);
-  margin: 2rem 36rem;
+  margin: 2rem auto;
+  width: 1200px;
 }
 
 .grid-form {
@@ -244,4 +245,100 @@ selectedcontent .icon {
 option:hover,
 option:focus {
   background: var(--accent-wood);
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  #book-form {
+    width: 1200px;
+    margin: 2rem 7rem;
+  }
+
+  #book-form input[type="text"],
+  #book-form input[type="number"],
+  #book-form select {
+    width: 450px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #book-form {
+    margin: 2rem 4rem;
+    width: 900px;
+  }
+
+  #book-form input[type="text"],
+  #book-form input[type="number"],
+  #book-form select {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  #book-form {
+    margin: 2rem 5rem;
+    padding: 2rem 3rem;
+  }
+
+  .grid-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #book-form input[type="text"],
+  #book-form input[type="number"],
+  #book-form select {
+    width: 200px;
+  }
+
+  .form-upload {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  #book-form h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #book-form {
+    margin: 1rem 1rem;
+    padding: 1.5rem 1.5rem;
+  }
+
+  #book-form h2 {
+    font-size: 1.4rem;
+  }
+
+  #book-form label {
+    font-size: 1rem;
+  }
+
+  #book-form input[type="text"],
+  #book-form input[type="number"],
+  #book-form select {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  #book-form button[type="submit"] {
+    width: 100%;
+    height: 45px;
+  }
+
+  .form-upload {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #book-form {
+    margin: 0.5rem 0.5rem;
+    padding: 1rem 1rem;
+  }
+
+  #book-form h2 {
+    font-size: 1.2rem;
+  }
 }
