@@ -270,14 +270,16 @@ option:focus {
   #book-form input[type="text"],
   #book-form input[type="number"],
   #book-form select {
-    width: 300px;
+    width: 350px;
   }
 }
 
 @media (max-width: 768px) {
   #book-form {
-    margin: 2rem 5rem;
+    margin: 2rem 2rem;
     padding: 2rem 3rem;
+    width: 90%;
+    max-width: 600px;
   }
 
   .grid-form {
@@ -288,7 +290,7 @@ option:focus {
   #book-form input[type="text"],
   #book-form input[type="number"],
   #book-form select {
-    width: 200px;
+    width: 100%;
   }
 
   .form-upload {
@@ -303,8 +305,10 @@ option:focus {
 
 @media (max-width: 480px) {
   #book-form {
-    margin: 1rem 1rem;
-    padding: 1.5rem 1.5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+    width: calc(100% - 2rem);
+    max-width: none;
   }
 
   #book-form h2 {
@@ -320,6 +324,7 @@ option:focus {
   #book-form select {
     font-size: 1rem;
     padding: 0.6rem;
+    width: 100%;
   }
 
   #book-form button[type="submit"] {
@@ -334,8 +339,9 @@ option:focus {
 
 @media (max-width: 360px) {
   #book-form {
-    margin: 0.5rem 0.5rem;
-    padding: 1rem 1rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    width: calc(100% - 1rem);
   }
 
   #book-form h2 {
