@@ -185,6 +185,11 @@
     width: 350px;
   }
 
+  #preview-container {
+    max-width: 300px;
+    left: -30px;
+  }
+
   .image-preview-wrapper:nth-child(1),
   .image-preview-wrapper:nth-child(2),
   .image-preview-wrapper:nth-child(3),

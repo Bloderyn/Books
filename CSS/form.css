@@ -272,6 +272,10 @@ option:focus {
   #book-form select {
     width: 350px;
   }
+
+  .form-upload {
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
