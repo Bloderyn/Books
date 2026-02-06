@@ -274,7 +274,11 @@ option:focus {
   }
 
   .form-upload {
-    gap: 2rem;
+    gap: 6rem;
+  }
+
+  .add-book {
+    margin-right: -100px;
   }
 }
 
