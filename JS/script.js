@@ -181,7 +181,7 @@ function loadLibrary() {
         item.pages,
         item.genreSelect,
         covers,
-        item.read,
+        item.status,
       );
       bookItem.id = item.id;
       myLibrary.push(bookItem);
