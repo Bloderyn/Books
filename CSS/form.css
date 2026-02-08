@@ -284,9 +284,9 @@ option:focus {
 
 @media (max-width: 768px) {
   #book-form {
-    margin: 2rem 2rem;
+    margin: 2rem 6rem;
     padding: 2rem 3rem;
-    width: 90%;
+    width: 800px;
     max-width: 600px;
   }
 
@@ -308,6 +308,10 @@ option:focus {
 
   #book-form h2 {
     font-size: 1.6rem;
+  }
+
+  #book-form label {
+    justify-content: center;
   }
 }
 

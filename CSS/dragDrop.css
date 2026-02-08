@@ -134,6 +134,8 @@
   margin-left: 200px;
   display: block;
   font-family: "Lancelot", sans-serif;
+  cursor: default;
+  user-select: none;
 }
 
 @media (max-width: 1440px) {
@@ -205,22 +207,6 @@
     filter: blur(2px);
   }
 
-  .image-preview-wrapper:nth-child(1) {
-    transform: translateX(calc(-50% - 100px)) scale(0.75);
-  }
-
-  .image-preview-wrapper:nth-child(2) {
-    transform: translateX(calc(-50% - 50px)) scale(0.8);
-  }
-
-  .image-preview-wrapper:nth-child(3) {
-    transform: translateX(calc(-50% + 50px)) scale(0.8);
-  }
-
-  .image-preview-wrapper:nth-child(4) {
-    transform: translateX(calc(-50% + 100px)) scale(0.75);
-  }
-
   .image-preview-wrapper.active {
     opacity: 1;
     visibility: visible;
@@ -234,40 +220,17 @@
     opacity: 1;
   }
 
-  #preview-container:hover .image-preview-wrapper:nth-child(1),
-  #preview-container:hover .image-preview-wrapper:nth-child(2),
-  #preview-container:hover .image-preview-wrapper:nth-child(3),
-  #preview-container:hover .image-preview-wrapper:nth-child(4) {
-    transform: none;
+  /* Disable all hover effects on mobile - carousel only */
+  #preview-container:hover .image-preview-wrapper.active {
+    transform: translateX(-50%) scale(1) !important;
   }
 
-  #preview-container .image-preview-wrapper:hover {
-    z-index: auto !important;
+  .image-preview-wrapper:hover .remove-image-btn {
+    opacity: 0;
   }
 
-  .carousel-dots {
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 20;
-  }
-
-  .carousel-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--border);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .carousel-dot.active {
-    background-color: var(--primary, #4a90e2);
-    width: 24px;
-    border-radius: 4px;
+  .image-preview-wrapper.active:hover .remove-image-btn {
+    opacity: 1;
   }
 
   .carousel-arrow {
@@ -319,8 +282,8 @@
 
 @media (max-width: 768px) {
   #drop-zone {
-    width: 100%;
-    max-width: 500px;
+    width: 500px;
+    height: 180px;
   }
 
   #preview-container {
@@ -330,6 +293,29 @@
   .image-preview-wrapper {
     width: 110px;
     height: 150px;
+  }
+
+  .cover-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .cover-upload label {
+    margin-left: 0;
+    font-size: 1.1rem;
+  }
+
+  .add-icon {
+    margin-left: 200px;
+  }
+
+  .add-book {
+    margin-top: -20px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

@@ -147,27 +147,6 @@ function initCarousel() {
       dropZone.appendChild(nextArrow);
     }
   }
-
-  let dotsContainer = document.querySelector(".carousel-dots");
-  if (!dotsContainer && window.uploadedImages.length > 1) {
-    dotsContainer = document.createElement("div");
-    dotsContainer.className = "carousel-dots";
-    previewContainer.appendChild(dotsContainer);
-  }
-
-  if (dotsContainer) {
-    dotsContainer.innerHTML = "";
-    window.uploadedImages.forEach((_, index) => {
-      const dot = document.createElement("span");
-      dot.className = "carousel-dot";
-      if (index === currentSlide) dot.classList.add("active");
-      dot.addEventListener("click", () => {
-        currentSlide = index;
-        updateCarouselPosition();
-      });
-      dotsContainer.appendChild(dot);
-    });
-  }
 }
 
 function updateCarouselPosition() {
@@ -198,12 +177,6 @@ function updateCarouselPosition() {
     }
   });
 
-  const dots = document.querySelectorAll(".carousel-dot");
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentSlide);
-  });
-
-  // Update arrow visibility
   const prevArrow = document.querySelector(".carousel-arrow-prev");
   const nextArrow = document.querySelector(".carousel-arrow-next");
 
@@ -261,13 +234,23 @@ window.addEventListener("resize", () => {
   if (window.innerWidth <= 1024) {
     initCarousel();
   } else {
-    const dotsContainer = document.querySelector(".carousel-dots");
     const prevArrow = document.querySelector(".carousel-arrow-prev");
     const nextArrow = document.querySelector(".carousel-arrow-next");
 
-    if (dotsContainer) dotsContainer.remove();
     if (prevArrow) prevArrow.remove();
     if (nextArrow) nextArrow.remove();
+
+    const wrappers = document.querySelectorAll(".image-preview-wrapper");
+    wrappers.forEach((wrapper, index) => {
+      wrapper.classList.remove("active");
+      wrapper.style.transform = "";
+      wrapper.style.zIndex = window.uploadedImages.length - index;
+      wrapper.style.left = "";
+      wrapper.style.opacity = "";
+      wrapper.style.visibility = "";
+      wrapper.style.pointerEvents = "";
+      wrapper.style.filter = "";
+    });
 
     currentSlide = 0;
   }
