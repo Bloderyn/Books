@@ -14,12 +14,12 @@ function Book(title, author, pages, genreSelect, coverUrls, status) {
 }
 
 Book.prototype.toggleRead = function () {
-  if (this.status === "not-read") {
+  if (this.status === "unread") {
     this.status = "reading";
   } else if (this.status === "reading") {
     this.status = "read";
   } else {
-    this.status = "not-read";
+    this.status = "unread";
   }
 };
 
@@ -56,36 +56,76 @@ document.addEventListener("click", (e) => {
   }
 });
 
+function getStatusText(status) {
+  if (status === "read") return "Read";
+  if (status === "reading") return "Currently reading";
+  if (status === "unread") return "Not Read";
+  return "Not Read";
+}
+
 function displayBooks() {
   const container = document.querySelector(".books-container");
   container.innerHTML = "";
 
-  myLibrary.forEach((book) => {
-    const card = document.createElement("li");
-    card.classList.add("book-card", book.status);
-    card.dataset.id = book.id;
+  const booksByStatus = {
+    reading: myLibrary.filter((book) => book.status === "reading"),
+    unread: myLibrary.filter((book) => book.status === "unread"),
+    read: myLibrary.filter((book) => book.status === "read"),
+  };
 
-    let coverHtml = "";
-    if (book.coverUrls && book.coverUrls.length > 0) {
-      coverHtml = `<div class="hover-gallery">`;
-      book.coverUrls.forEach((url, index) => {
-        coverHtml += `<div class="hover-zone hover-zone-${index + 1}">
-          <img src="${url}" alt="${book.title} cover" class="book-cover">
-        </div>`;
+  const statuses = [
+    { key: "reading", label: "Currently Reading" },
+    { key: "unread", label: "To Read" },
+    { key: "read", label: "Finished" },
+  ];
+
+  for (const { key, label } of statuses) {
+    const books = booksByStatus[key];
+    if (books.length > 0) {
+      const section = document.createElement("div");
+      section.classList.add("status-section");
+
+      const heading = document.createElement("h3");
+      heading.classList.add("status-heading");
+      heading.textContent = `${label} (${books.length})`;
+      section.appendChild(heading);
+
+      books.forEach((book) => {
+        const card = createBookCard(book);
+        section.appendChild(card);
       });
 
-      if (book.coverUrls.length > 1) {
-        coverHtml += `<div class="gallery-dots">`;
-        for (let i = 1; i < book.coverUrls.length; i++) {
-          coverHtml += `<span class="gallery-dot"></span>`;
-        }
-        coverHtml += `</div>`;
-      }
+      container.appendChild(section);
+    }
+  }
+}
 
+function createBookCard(book) {
+  const card = document.createElement("li");
+  card.classList.add("book-card", book.status);
+  card.dataset.id = book.id;
+
+  let coverHtml = "";
+  if (book.coverUrls && book.coverUrls.length > 0) {
+    coverHtml = `<div class="hover-gallery">`;
+    book.coverUrls.forEach((url, index) => {
+      coverHtml += `<div class="hover-zone hover-zone-${index + 1}">
+          <img src="${url}" alt="${book.title} cover" class="book-cover">
+        </div>`;
+    });
+
+    if (book.coverUrls.length > 1) {
+      coverHtml += `<div class="gallery-dots">`;
+      for (let i = 1; i < book.coverUrls.length; i++) {
+        coverHtml += `<span class="gallery-dot"></span>`;
+      }
       coverHtml += `</div>`;
     }
 
-    card.innerHTML = `
+    coverHtml += `</div>`;
+  }
+
+  card.innerHTML = `
       <div class="card-layout">
         <div class="card-image">
           ${coverHtml}
@@ -95,13 +135,13 @@ function displayBooks() {
           <h2>${book.title}</h2>
           <p><b>Author:</b> ${book.author}</p>
           <p><b>Pages:</b> ${book.pages}</p>
-          <p><b>Status:</b> ${book.status === "read" ? "Read" : book.status === "reading" ? "Currently reading" : "Not Read"}</p>
+          <p><b>Status:</b> ${getStatusText(book.status)}</p>
           <p><b>Genre:</b> ${book.genreSelect}</p>
         </div>
         <div class="card-buttons">
           <button class="toggle-read-btn ${book.status}">
   ${
-    book.status === "not-read"
+    book.status === "unread"
       ? "Start Reading"
       : book.status === "reading"
         ? "Mark as Read"
@@ -114,8 +154,7 @@ function displayBooks() {
       </div>
       `;
 
-    container.appendChild(card);
-  });
+  return card;
 }
 
 function addBookToLibrary() {
@@ -125,9 +164,7 @@ function addBookToLibrary() {
   const pages = document.getElementById("pages").value;
   const genre = document.getElementById("genreSelect").value;
   const coverUrls = window.uploadedImages ? [...window.uploadedImages] : [];
-  const status = document.getElementById("read-status").checked
-    ? "read"
-    : "not-read";
+  const status = document.getElementById("read-status").value;
 
   const newBook = new Book(title, author, pages, genre, coverUrls, status);
 

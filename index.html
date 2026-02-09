@@ -126,10 +126,12 @@
           </div>
 
           <div class="add-book">
-            <label for="read-status">
-              <input id="read-status" type="checkbox" name="read-status" />
-              Already read
-            </label>
+            <label for="read-status">Reading Status:</label>
+            <select id="read-status" name="read-status">
+              <option class="animation-stagger" value="unread">Unread</option>
+              <option class="animation-stagger" value="reading">Reading</option>
+              <option class="animation-stagger" value="read">Read</option>
+            </select>
 
             <button type="submit">Add Book</button>
           </div>

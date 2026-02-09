@@ -29,6 +29,11 @@
   margin-top: 1.5rem;
   gap: 1rem;
   padding-top: 1rem;
+  margin-left: 50px;
+}
+
+.add-book select {
+  width: 300px !important;
 }
 
 #book-form input[type="text"],
