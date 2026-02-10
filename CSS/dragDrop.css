@@ -25,6 +25,12 @@
   overflow: visible;
 }
 
+#drop-zone:hover:not(.has-image) {
+  background-color: var(--bg-hover);
+  border-color: var(--accent-green);
+  transform: translateY(-2px);
+}
+
 #preview-container {
   display: flex;
   justify-content: center;
@@ -125,7 +131,7 @@
 }
 
 .cover-upload {
-  margin-left: -90px;
+  margin-left: -80px;
   margin-top: 2rem;
 }
 
@@ -145,7 +151,7 @@
 
   #preview-container {
     width: 280px;
-    left: -40px;
+    left: 0;
   }
 
   .image-preview-wrapper {
@@ -174,7 +180,7 @@
   }
 
   .cover-upload {
-    margin-left: -250px;
+    margin-left: -60px;
   }
 
   .cover-upload label {
@@ -278,7 +284,11 @@
   .cover-upload label {
     margin-left: 130px;
   }
+
+  .cover-upload {
+    margin-left: -110px;
 }
+} 
 
 @media (max-width: 768px) {
   #drop-zone {
@@ -321,7 +331,7 @@
 
 @media (max-width: 480px) {
   #drop-zone {
-    width: 100%;
+    width: 350px;
     min-height: 150px;
     padding: 0.6rem;
   }

@@ -264,6 +264,10 @@ option:focus {
   #book-form select {
     width: 450px;
   }
+
+  .form-upload {
+    gap: 4rem;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -279,7 +283,7 @@ option:focus {
   }
 
   .form-upload {
-    gap: 6rem;
+    gap: 1rem;
   }
 
   .add-book {
@@ -322,7 +326,7 @@ option:focus {
 
 @media (max-width: 480px) {
   #book-form {
-    margin: 1rem;
+    margin: 1rem 4rem;
     padding: 1.5rem;
     width: calc(100% - 2rem);
     max-width: none;
