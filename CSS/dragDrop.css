@@ -151,7 +151,7 @@
 
   #preview-container {
     width: 280px;
-    left: 0;
+    left: -50px;
   }
 
   .image-preview-wrapper {
@@ -160,7 +160,7 @@
   }
 
   .image-preview-wrapper:nth-child(1) {
-    left: 0;
+    left: 0px;
   }
 
   .image-preview-wrapper:nth-child(2) {
