@@ -27,8 +27,19 @@
 
 #drop-zone:hover:not(.has-image) {
   background-color: var(--bg-hover);
-  border-color: var(--accent-green);
+  border-color: var(--accent-wood);
   transform: translateY(-2px);
+}
+
+#drop-zone.dragover {
+  background-color: var(--bg-hover);
+  border-color: var(--accent-wood);
+  border-style: dashed;
+  box-shadow:
+    0 0 10px rgba(109, 85, 63, 0.3),
+    0 0 20px rgba(109, 85, 63, 0.2),
+    inset 0 0 10px rgba(109, 85, 63, 0.1);
+  transform: scale(1.02);
 }
 
 #preview-container {
@@ -287,8 +298,8 @@
 
   .cover-upload {
     margin-left: -110px;
+  }
 }
-} 
 
 @media (max-width: 768px) {
   #drop-zone {
