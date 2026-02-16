@@ -6,7 +6,8 @@
   box-shadow: 0 2px 6px var(--shadow);
   border: 1px solid var(--border);
   margin: 2rem auto;
-  width: 1200px;
+  width: 90%;
+  max-width: 1200px;
 }
 
 .grid-form {
@@ -255,8 +256,9 @@ option:focus {
 /* Responsive Design */
 @media (max-width: 1440px) {
   #book-form {
-    width: 1200px;
-    margin: 2rem 7rem;
+    width: 85%;
+    max-width: 1100px;
+    margin: 2rem auto;
   }
 
   #book-form input[type="text"],
@@ -272,8 +274,10 @@ option:focus {
 
 @media (max-width: 1024px) {
   #book-form {
-    margin: 2rem 4rem;
-    width: 900px;
+    width: 90%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem 3rem;
   }
 
   #book-form input[type="text"],
@@ -293,10 +297,10 @@ option:focus {
 
 @media (max-width: 768px) {
   #book-form {
-    margin: 2rem 6rem;
-    padding: 2rem 3rem;
-    width: 800px;
-    max-width: 600px;
+    width: 90%;
+    max-width: none;
+    margin: 2rem auto;
+    padding: 2rem 1.5rem;
   }
 
   .grid-form {
@@ -322,14 +326,19 @@ option:focus {
   #book-form label {
     justify-content: center;
   }
+  
+  .add-book {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 480px) {
   #book-form {
-    margin: 1rem 4rem;
-    padding: 1.5rem;
-    width: calc(100% - 2rem);
+    width: 95%;
     max-width: none;
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
   }
 
   #book-form h2 {
@@ -356,13 +365,17 @@ option:focus {
   .form-upload {
     gap: 1.5rem;
   }
+  
+  .add-book select {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 360px) {
   #book-form {
-    margin: 0.5rem;
-    padding: 1rem;
-    width: calc(100% - 1rem);
+    width: 98%;
+    margin: 0.5rem auto;
+    padding: 1rem 0.75rem;
   }
 
   #book-form h2 {

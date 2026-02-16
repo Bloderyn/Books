@@ -3,6 +3,7 @@
   --bg-card: #c4b4a1;
   --bg-form: #d8d0c5;
   --bg-hover: #ded8d0;
+  --bg-feature: #f0e9e0;
 
   --text-main: #2f2f2f;
   --text-soft: #5a5858;
@@ -14,14 +15,19 @@
   --accent-soft-brown: #d3c4b8;
 
   --border: #c9bdaf;
+  --border-color: #c9bdaf;
   --shadow: rgba(0, 0, 0, 0.08);
   --bg-pattern: rgba(0, 0, 0, 0.02);
+
+  --card-hover-bg: #f8f9fa;
 }
 
 :root.dark-mode {
   --bg-main: #292421;
   --bg-card: #463a36;
-  --bg-form: #382f2e;  --bg-hover: #332d29;
+  --bg-form: #382f2e;
+  --bg-hover: #332d29;
+  --bg-feature: #3d3532;
   --text-main: #f1e9db;
   --text-soft: #b9ae9f;
 
@@ -32,8 +38,11 @@
   --accent-soft-brown: #2e2724;
 
   --border: #463f3a;
+  --border-color: #463f3a;
   --shadow: rgba(0, 0, 0, 0.35);
   --bg-pattern: rgba(255, 255, 255, 0.015);
+
+  --card-hover-bg: #413937;
 }
 
 * {

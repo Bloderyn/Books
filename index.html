@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="CSS/dragDrop.css" />
 
     <link rel="stylesheet" href="CSS/bookCards.css" />
+
+    <link rel="stylesheet" href="CSS/newFeatures.css" />
   </head>
 
   <body>
@@ -48,6 +50,90 @@
     </header>
 
     <main>
+      <section class="search-filter-section">
+        <div class="search-bar">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search books by title, author, or genre..."
+          />
+        </div>
+        <div class="filter-controls">
+          <select id="genre-filter">
+            <option class="animation-stagger" value="all">All Genres</option>
+            <option class="animation-stagger" value="fantasy">Fantasy</option>
+            <option class="animation-stagger" value="science-fiction">
+              Science Fiction
+            </option>
+            <option class="animation-stagger" value="mystery">Mystery</option>
+            <option class="animation-stagger" value="non-fiction">
+              Non-Fiction
+            </option>
+            <option class="animation-stagger" value="romance">Romance</option>
+            <option class="animation-stagger" value="horror">Horror</option>
+            <option class="animation-stagger" value="historical">
+              Historical
+            </option>
+            <option class="animation-stagger" value="thriller">Thriller</option>
+            <option class="animation-stagger" value="biography">
+              Biography
+            </option>
+          </select>
+          <select id="sort-select">
+            <option class="animation-stagger" value="default">
+              Sort by Status
+            </option>
+            <option class="animation-stagger" value="title-asc">
+              Title (A-Z)
+            </option>
+            <option class="animation-stagger" value="title-desc">
+              Title (Z-A)
+            </option>
+            <option class="animation-stagger" value="author-asc">
+              Author (A-Z)
+            </option>
+            <option class="animation-stagger" value="pages-asc">
+              Pages (Low-High)
+            </option>
+            <option class="animation-stagger" value="pages-desc">
+              Pages (High-Low)
+            </option>
+          </select>
+        </div>
+      </section>
+
+      <section class="stats-dashboard" id="stats-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Books</h3>
+            <p class="stat-value" id="stat-total">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Books Read</h3>
+            <p class="stat-value" id="stat-read">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Currently Reading</h3>
+            <p class="stat-value" id="stat-reading">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Pages</h3>
+            <p class="stat-value" id="stat-pages">0</p>
+          </div>
+        </div>
+      </section>
+
       <form id="book-form">
         <h2>Add a new book</h2>
 
@@ -140,6 +226,58 @@
 
       <ul class="books-container"></ul>
     </main>
+
+    <div id="book-details-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div class="modal-body">
+          <div class="modal-info">
+            <p><b>Author:</b> <span id="modal-author"></span></p>
+            <p><b>Pages:</b> <span id="modal-pages"></span></p>
+            <p><b>Genre:</b> <span id="modal-genre"></span></p>
+            <p><b>Status:</b> <span id="modal-status"></span></p>
+
+            <div class="rating-section">
+              <label><b>Rating:</b></label>
+              <div class="star-rating" id="star-rating">
+                <span class="star" data-rating="1">☆</span>
+                <span class="star" data-rating="2">☆</span>
+                <span class="star" data-rating="3">☆</span>
+                <span class="star" data-rating="4">☆</span>
+                <span class="star" data-rating="5">☆</span>
+              </div>
+            </div>
+
+            <div class="progress-section" id="progress-section">
+              <label for="current-page-input"><b>Current Page:</b></label>
+              <input type="number" id="current-page-input" min="0" />
+              <button id="update-progress-btn">Update Progress</button>
+            </div>
+
+            <div class="dates-section">
+              <p><b>Date Added:</b> <span id="modal-date-added"></span></p>
+              <p id="start-date-display">
+                <b>Started:</b> <span id="modal-start-date"></span>
+              </p>
+              <p id="end-date-display">
+                <b>Finished:</b> <span id="modal-end-date"></span>
+              </p>
+            </div>
+
+            <div class="notes-section">
+              <label for="notes-input"><b>Personal Notes:</b></label>
+              <textarea
+                id="notes-input"
+                rows="5"
+                placeholder="Add your thoughts, review, or notes about this book..."
+              ></textarea>
+              <button id="save-notes-btn">Save Notes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="JS/script.js" defer></script>
     <script src="JS/darkmode.js" defer></script>
