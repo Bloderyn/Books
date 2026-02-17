@@ -1,0 +1,149 @@
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 3rem 0;
+  padding: 2rem 0;
+}
+
+.pagination-info {
+  font-family: "EB Garamond", serif;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-main);
+}
+
+.pagination-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-number-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 0.8rem;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "EB Garamond", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.page-number-btn:hover {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.page-number-btn.active {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pagination-ellipsis {
+  color: var(--text-main);
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .pagination-container {
+    margin: 2rem 0;
+    gap: 1rem;
+  }
+
+  .pagination-info {
+    font-size: 0.95rem;
+  }
+
+  .pagination-btn,
+  .page-number-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  .pagination-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .page-number-btn {
+    font-size: 0.9rem;
+  }
+
+  .pagination-controls {
+    gap: 0.5rem;
+  }
+
+  .page-numbers {
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-info {
+    font-size: 0.85rem;
+  }
+
+  .pagination-btn,
+  .page-number-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .page-number-btn {
+    padding: 0 0.5rem;
+    font-size: 0.85rem;
+  }
+}

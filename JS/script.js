@@ -111,10 +111,27 @@ function displayBooks() {
   let filteredBooks = filterBooks(myLibrary);
   filteredBooks = sortBooks(filteredBooks);
 
+  // Calculate pagination
+  const totalBooks = filteredBooks.length;
+  const totalPages = Math.ceil(totalBooks / itemsPerPage);
+  
+  // Ensure current page is valid
+  if (currentPage > totalPages && totalPages > 0) {
+    currentPage = totalPages;
+  }
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+
+  // Get books for current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
+
   const booksByStatus = {
-    reading: filteredBooks.filter((book) => book.status === "reading"),
-    unread: filteredBooks.filter((book) => book.status === "unread"),
-    read: filteredBooks.filter((book) => book.status === "read"),
+    reading: paginatedBooks.filter((book) => book.status === "reading"),
+    unread: paginatedBooks.filter((book) => book.status === "unread"),
+    read: paginatedBooks.filter((book) => book.status === "read"),
   };
 
   const statuses = [
@@ -144,6 +161,127 @@ function displayBooks() {
   }
 
   updateStatistics();
+  renderPaginationControls(totalBooks, totalPages);
+}
+
+function renderPaginationControls(totalBooks, totalPages) {
+  let paginationContainer = document.querySelector(".pagination-container");
+  
+  if (!paginationContainer) {
+    paginationContainer = document.createElement("div");
+    paginationContainer.classList.add("pagination-container");
+    const booksContainer = document.querySelector(".books-container");
+    booksContainer.parentNode.insertBefore(paginationContainer, booksContainer.nextSibling);
+  }
+
+  if (totalPages <= 1) {
+    paginationContainer.innerHTML = "";
+    return;
+  }
+
+  const startBook = (currentPage - 1) * itemsPerPage + 1;
+  const endBook = Math.min(currentPage * itemsPerPage, totalBooks);
+
+  let paginationHTML = `
+    <div class="pagination-info">
+      Showing ${startBook}-${endBook} of ${totalBooks} books
+    </div>
+    <div class="pagination-controls">
+      <button class="pagination-btn" id="first-page-btn" ${currentPage === 1 ? "disabled" : ""}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="11 17 6 12 11 7"></polyline>
+          <polyline points="18 17 13 12 18 7"></polyline>
+        </svg>
+      </button>
+      <button class="pagination-btn" id="prev-page-btn" ${currentPage === 1 ? "disabled" : ""}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="page-numbers">
+  `;
+
+  // Show page numbers with ellipsis for large page counts
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+  if (endPage - startPage < maxVisiblePages - 1) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  if (startPage > 1) {
+    paginationHTML += `<button class="page-number-btn" data-page="1">1</button>`;
+    if (startPage > 2) {
+      paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+    }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    paginationHTML += `<button class="page-number-btn ${i === currentPage ? "active" : ""}" data-page="${i}">${i}</button>`;
+  }
+
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+    }
+    paginationHTML += `<button class="page-number-btn" data-page="${totalPages}">${totalPages}</button>`;
+  }
+
+  paginationHTML += `
+      </div>
+      <button class="pagination-btn" id="next-page-btn" ${currentPage === totalPages ? "disabled" : ""}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <button class="pagination-btn" id="last-page-btn" ${currentPage === totalPages ? "disabled" : ""}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="13 17 18 12 13 7"></polyline>
+          <polyline points="6 17 11 12 6 7"></polyline>
+        </svg>
+      </button>
+    </div>
+  `;
+
+  paginationContainer.innerHTML = paginationHTML;
+
+  // Add event listeners
+  document.getElementById("first-page-btn")?.addEventListener("click", () => {
+    currentPage = 1;
+    displayBooks();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("prev-page-btn")?.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayBooks();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  document.getElementById("next-page-btn")?.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayBooks();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  document.getElementById("last-page-btn")?.addEventListener("click", () => {
+    currentPage = totalPages;
+    displayBooks();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.querySelectorAll(".page-number-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentPage = parseInt(btn.dataset.page);
+      displayBooks();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
 }
 
 function createBookCard(book) {
@@ -329,6 +467,8 @@ function loadLibrary() {
 let currentSearchTerm = "";
 let currentGenreFilter = "all";
 let currentSort = "default";
+let currentPage = 1;
+const itemsPerPage = 12;
 
 function filterBooks(books) {
   let filtered = [...books];
@@ -396,6 +536,7 @@ const sortSelect = document.getElementById("sort-select");
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     currentSearchTerm = e.target.value.toLowerCase();
+    currentPage = 1; 
     displayBooks();
   });
 }
@@ -403,6 +544,7 @@ if (searchInput) {
 if (genreFilter) {
   genreFilter.addEventListener("change", (e) => {
     currentGenreFilter = e.target.value;
+    currentPage = 1; 
     displayBooks();
   });
 }
@@ -410,6 +552,7 @@ if (genreFilter) {
 if (sortSelect) {
   sortSelect.addEventListener("change", (e) => {
     currentSort = e.target.value;
+    currentPage = 1; 
     displayBooks();
   });
 }
